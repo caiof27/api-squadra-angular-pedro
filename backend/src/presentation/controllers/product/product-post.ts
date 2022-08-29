@@ -17,17 +17,10 @@ export class ProductPostController implements Controller {
 
     const { name, price } = httpRequest.body;
 
-    let account;
-
-    await db.product
-      .create({
-        name,
-        price,
-      })
-      .then(
-        async (result: { id: any }) =>
-          (account = await db.product.findByPk(result.id))
-      );
+    const account = await db.product.create({
+      name,
+      price,
+    });
 
     return ok(account);
   }

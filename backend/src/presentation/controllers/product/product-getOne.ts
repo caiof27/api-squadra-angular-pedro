@@ -9,7 +9,7 @@ export class ProductGetOneController implements Controller {
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     const id = httpRequest.params["id"];
 
-    let account = await db.product.findOne({ where: { id } });
+    const account = await db.product.findOne({ where: { id } });
 
     return ok(account);
   }

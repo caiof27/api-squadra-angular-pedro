@@ -10,9 +10,7 @@ export class ProductDeleteController implements Controller {
 
     const id = httpRequest.params["id"];
 
-    let account;
-
-    await db.product.destroy({ where: { id } });
+    const account = await db.product.destroy({ where: { id } });
 
     return ok(account);
   }

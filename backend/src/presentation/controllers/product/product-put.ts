@@ -19,13 +19,15 @@ export class ProductPutController implements Controller {
 
     const { name, price } = httpRequest.body;
 
-    const account = await db.product.update(
+    await db.product.update(
       {
         name,
         price,
       },
       { where: { id } }
     );
+
+    const account = await db.product.findOne({ where: { id } });
 
     return ok(account);
   }
