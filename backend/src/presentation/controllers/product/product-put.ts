@@ -7,7 +7,7 @@ import db from "../../../infra/db/postgres/models";
 export class ProductPutController implements Controller {
   constructor() {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    const requireFields = ["id","name", "price"];
+    const requireFields = ["name", "price"];
 
     for (const field of requireFields) {
       if (!httpRequest.body[field]) {
@@ -15,15 +15,17 @@ export class ProductPutController implements Controller {
       }
     }
 
-    const { id, name, price } = httpRequest.body;
+    const id = httpRequest.params["id"];
 
-    let account;
+    const { name, price } = httpRequest.body;
 
-    await db.product
-      .update({
+    const account = await db.product.update(
+      {
         name,
         price,
-      },{where:{id: id}})
+      },
+      { where: { id } }
+    );
 
     return ok(account);
   }

@@ -7,20 +7,12 @@ import db from "../../../infra/db/postgres/models";
 export class ProductDeleteController implements Controller {
   constructor() {}
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    const requireFields = ["id"];
 
-    for (const field of requireFields) {
-      if (!httpRequest.body[field]) {
-        return badRequest(new MissingParamError(field));
-      }
-    }
-
-    const { id } = httpRequest.body;
+    const id = httpRequest.params["id"];
 
     let account;
 
-    await db.product
-      .destroy({where:{id: id}})
+    await db.product.destroy({ where: { id } });
 
     return ok(account);
   }

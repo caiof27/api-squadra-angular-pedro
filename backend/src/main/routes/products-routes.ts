@@ -10,6 +10,6 @@ export default (router: Router): void => {
   router.post("/products",adaptRoute(makeProductPostController()));
   router.get("/products",adaptRoute(makeProductGetController()));
   router.get("/products/:id",adaptRoute(makeProductGetOneController()));
-  router.delete("/products",adaptRoute(makeProductDeleteController()));
-  router.put("/products",adaptRoute(makeProductPutController()));
+  router.delete("/products/:id",adaptRoute(makeProductDeleteController()));
+  router.put("/products/:id",adaptRoute(makeProductPutController()));
 };
