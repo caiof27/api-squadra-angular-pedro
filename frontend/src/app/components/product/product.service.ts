@@ -8,7 +8,7 @@ import { Product } from "./product.model";
   providedIn: "root",
 })
 export class ProductService {
-  baseUrl = "http://localhost:3001/products";
+  baseUrl = "http://localhost:3000/products";
 
   constructor(private snackBar: MatSnackBar, private http: HttpClient) {}
 
@@ -26,7 +26,8 @@ export class ProductService {
   }
 
   create(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.baseUrl, product).pipe(
+    const url = `${this.baseUrl}/create`;
+    return this.http.post<Product>(url, product).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
     );
@@ -36,7 +37,7 @@ export class ProductService {
     return this.http.get<Product[]>(this.baseUrl).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
-    );;
+    );
   }
 
   readById(id: string): Observable<Product> {
@@ -44,22 +45,22 @@ export class ProductService {
     return this.http.get<Product>(url).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
-    );;
+    );
   }
 
   update(product: Product): Observable<Product> {
-    const url = `${this.baseUrl}/${product.id}`;
+    const url = `${this.baseUrl}/update/${product.id}`;
     return this.http.put<Product>(url, product).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
-    );;
+    );
   }
 
   delete(id: string): Observable<Product> {
-    const url = `${this.baseUrl}/${id}`;
+    const url = `${this.baseUrl}/delete/${id}`;
     return this.http.delete<Product>(url).pipe(
       map((obj) => obj),
       catchError((e) => this.errorHandler(e))
-    );;
+    );
   }
 }

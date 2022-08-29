@@ -7,9 +7,9 @@ import { makeProductPostController } from "../factories/product-post";
 import { makeProductPutController } from "../factories/product-put";
 
 export default (router: Router): void => {
-  router.post("/products",adaptRoute(makeProductPostController()));
+  router.post("/products/create",adaptRoute(makeProductPostController()));
   router.get("/products",adaptRoute(makeProductGetController()));
   router.get("/products/:id",adaptRoute(makeProductGetOneController()));
-  router.delete("/products/:id",adaptRoute(makeProductDeleteController()));
-  router.put("/products/:id",adaptRoute(makeProductPutController()));
+  router.delete("/products/delete/:id",adaptRoute(makeProductDeleteController()));
+  router.put("/products/update/:id",adaptRoute(makeProductPutController()));
 };
